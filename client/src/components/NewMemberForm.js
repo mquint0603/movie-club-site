@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router";
 
+const port = process.env.PORT || 5000;
+
 export default function NewMemberForm() {
   const [name, setName] = useState("");
 
@@ -16,7 +18,7 @@ export default function NewMemberForm() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { name };
 
-    await fetch("http://localhost:3001/members/add", {
+    await fetch(`http://localhost:${port}/members/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
