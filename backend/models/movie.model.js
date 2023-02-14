@@ -7,6 +7,10 @@ const movieSchema = new Schema({
   year: { type: String, required: true },
   director: { type: String, required: true },
   picker: { type: String, required: true },
+  animated: {type: String},
+  rating: {type: String},
+  genre: {type: String},
+  awards: {type: String},
 });
 
 const Movie = mongoose.model("Movie", movieSchema);

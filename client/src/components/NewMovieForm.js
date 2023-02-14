@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import movieFields from "../constants/movieFields";
 
 function NewMovieForm() {
   const [data, setData] = useState({
     title: "",
     year: "",
+    genre: "",
+    rating: "",
     director: "",
     picker: "",
   });
@@ -35,52 +38,21 @@ function NewMovieForm() {
     <div>
       <h3>Add new movie</h3>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            value={data.title}
-            onChange={(e) => updateForm({ title: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="year">Year</label>
-          <input
-            type="text"
-            className="form-control"
-            id="year"
-            value={data.year}
-            onChange={(e) => updateForm({ year: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="director">Director</label>
-          <input
-            type="text"
-            className="form-control"
-            id="director"
-            value={data.director}
-            onChange={(e) => updateForm({ director: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="title">Picker</label>
-          <input
-            type="text"
-            className="form-control"
-            id="picker"
-            value={data.picker}
-            onChange={(e) => updateForm({ picker: e.target.value })}
-          />
-        </div>
+        {movieFields.map((field) => (
+          <div className="form-group my-2" key={field.name}>
+            <label htmlFor={field.name}>{field.display}</label>
+            <input
+              type="text"
+              className="form-control"
+              id="title"
+              value={data[field.name]}
+              onChange={(e) => updateForm({ [field.name]: e.target.value })}
+            />
+          </div>
+        ))}
+
         <div className="form-group mt-3">
-          <input
-            type="submit"
-            value="Add movie"
-            className="btn btn-primary"
-          />
+          <input type="submit" value="Add movie" className="btn btn-primary" />
         </div>
       </form>
     </div>

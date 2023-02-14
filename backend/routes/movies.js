@@ -2,7 +2,10 @@ const router = require("express").Router();
 let Movie = require("../models/movie.model");
 
 router.route("/").get((req, res) => {
-  Movie.find()
+  const sortParam = req.query.sort || 'title';
+  const sortOrder = req.query.sortOrder || 'asc';
+  
+  Movie.find({}).sort({[sortParam]: sortOrder, 'title': 'asc'})
     .then((movies) => res.json(movies))
     .catch((err) => res.json(err));
 });

@@ -41,8 +41,8 @@ function MovieList() {
 
   // This following section will display the table with the records of individuals.
   return (
-    <div className="p-3">
-      <h3>Movies</h3>
+    <div className="container p-3">
+      <h1>All Movies</h1>
       <button className="my-3" onClick={() => setShowAdd(!showAdd)}>
         {showAdd ? "Done" : "Add Movie"}
       </button>
