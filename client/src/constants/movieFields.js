@@ -5,5 +5,6 @@ const movieFields = [
   { name: "genre", display: "Genre" },
   { name: "director", display: "Director" },
   { name: "rating", display: "Rating" },
+  { name: "awards", display: "Academy Awards" },
 ];
 export default movieFields;

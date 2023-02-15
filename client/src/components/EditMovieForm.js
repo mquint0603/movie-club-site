@@ -12,7 +12,7 @@ const startingState = {
     awards: "",
   }
 
-function NewMovieForm() {
+function EditMovieForm() {
   const [data, setData] = useState(startingState);
 
   async function onSubmit(e) {
@@ -35,7 +35,7 @@ function NewMovieForm() {
 
   return (
     <div>
-      <h3>Add new movie</h3>
+      <h3>Edit movie</h3>
       <form onSubmit={onSubmit}>
         {movieFields.map((field) => (
           <div className="form-group my-2" key={field.name}>
@@ -57,4 +57,4 @@ function NewMovieForm() {
     </div>
   );
 }
-export default NewMovieForm;
+export default EditMovieForm;

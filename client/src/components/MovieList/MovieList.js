@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAllMovies } from "../../api/movies";
 import NewMovieForm from "../NewMovieForm";
 import SortMovies from "../SortMovies";
 
@@ -8,25 +9,14 @@ const port = 3002;
 function MovieList() {
   const [records, setRecords] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
-  const [sort, setSort] = useState('year')
-  const [sortOrder, setSortOrder] = useState('asc')
+  const [sort, setSort] = useState("title");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   // This method fetches the records from the database.
   useEffect(() => {
-    async function getRecords() {
-      const response = await fetch(`http://localhost:${port}/movies/?sort=${sort}&sortOrder=${sortOrder}`);
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-      const records = await response.json();
-      setRecords(records);
-    }
-
-    getRecords();
-
-    return;
+    getAllMovies(sort, sortOrder)
+      .then((movies) => setRecords(movies))
+      .catch((err) => window.alert(err));
   }, [sort, sortOrder]);
 
   // This method will delete a record
@@ -47,7 +37,7 @@ function MovieList() {
         {showAdd ? "Done" : "Add Movie"}
       </button>
       {showAdd ? <NewMovieForm /> : null}
-      <SortMovies sort={sort} setSort={setSort}/>
+      <SortMovies sort={sort} setSort={setSort} />
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
@@ -63,27 +53,27 @@ function MovieList() {
           {records.map((record) => {
             return (
               <tr key={record._id}>
-              <td>{record.title}</td>
-              <td>{record.year}</td>
-              <td>{record.genre}</td>
-              <td>{record.rating}</td>
-              <td>{record.director}</td>
-              <td>{record.picker}</td>
-              <td>
-                <Link className="btn btn-link" to={`/edit/${record._id}`}>
-                  Edit
-                </Link>{" "}
-                |
-                <button
-                  className="btn btn-link"
-                  onClick={() => {
-                    deleteRecord(record._id);
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
+                <td>{record.title}</td>
+                <td>{record.year}</td>
+                <td>{record.genre}</td>
+                <td>{record.rating}</td>
+                <td>{record.director}</td>
+                <td>{record.picker}</td>
+                <td>
+                  <Link className="btn btn-link" to={`/edit/${record._id}`}>
+                    Edit
+                  </Link>{" "}
+                  |
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      deleteRecord(record._id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
             );
           })}
         </tbody>
