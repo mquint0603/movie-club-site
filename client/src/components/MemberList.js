@@ -8,10 +8,6 @@ const Record = (props) => (
     <td>{props.record.position}</td>
     <td>{props.record.level}</td>
     <td>
-      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
-        Edit
-      </Link>{" "}
-      |
       <button
         className="btn btn-link"
         onClick={() => {
@@ -31,7 +27,7 @@ function MemberList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:3001/members/`);
+      const response = await fetch(`http://localhost:3002/members/`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -50,7 +46,7 @@ function MemberList() {
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://localhost:3001/${id}`, {
+    await fetch(`http://localhost:3002/members/delete/${id}`, {
       method: "DELETE",
     });
 

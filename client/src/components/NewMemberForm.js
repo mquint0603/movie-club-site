@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router";
 
-const port = process.env.PORT || 5000;
+const port = 3002;
 
 export default function NewMemberForm() {
   const [name, setName] = useState("");
